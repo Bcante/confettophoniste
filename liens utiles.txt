@@ -1,0 +1,2 @@
+https://stackoverflow.com/questions/3615533/get-clicks-through-html-canvas
+https://www.codehim.com/animation-effects/javascript-confetti-explosion-effect/
