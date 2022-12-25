@@ -1,3 +1,11 @@
+.play_icon {
+  max-width:30px;
+  max-height:30px;
+}
+.play_icon:hover {
+  cursor: pointer;
+}
+
 .confetti{
    pointer-events:none;
    display: block;
@@ -21,6 +29,7 @@
   padding: 15px;
   border: 1px solid #dfdfdf;
   background: #f5f5f5;
+
 }
 
 .slist li .test{

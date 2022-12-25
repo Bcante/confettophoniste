@@ -1,32 +1,58 @@
+
+// todo: ajouter un bouton de son qui joue le mot
+
 let items = "";
 let goodAnswers = "";
-let expectedArray = []
 // random de manière schlag du tableau
 
 let firstTime = true;
 
 window.onload = function init(){
 	let input = prompt("Ecrivez la phrase à remettre dans l'ordre en séparant les 'blocs' par des virgules");
-	//chat = "1,2,3";
+	
 	expectedArray = input.split(",");
 	let originArray = expectedArray.slice().sort((a, b) => 0.5 - Math.random()); 
-	//let originArray = expectedArray
-    var ul = document.getElementById("sortlist");
 	
+	// GESTION ITEMS
+    var ul = document.getElementById("sortlist");
 	for (let it=0; it<originArray.length; it++) {
+		var img = new Image();
+        img.src ='ressources/play_icon.png';
+		img.setAttribute("class","play_icon");			
+		img.id = "play_"+it; // feelin dirty: https://stackoverflow.com/questions/4825295/onclick-to-get-the-id-of-the-clicked-button
+		img.setAttribute("onClick","play_audio(\""+originArray[it]+"\")");
+
 		var li = document.createElement("li");
+		li.dataset.text = originArray[it] ;
+		li.appendChild(img);
 		li.appendChild(document.createTextNode(originArray[it]));
+
 		ul.appendChild(li);
 	}
+
+
+
 	slist(document.getElementById("sortlist"));
 	
+	// GESTION BOUTON SUBMIT
 	let button = document.querySelector('#myButton');
 
 	button.addEventListener('click', ()=>{
 	  checkAnswers();
 	})
+
+	// GESTION BOUTON PLAYS
+
+	//Init confettis
 	confettis();
   };
+
+
+  function play_audio(e) {
+	var msg = new SpeechSynthesisUtterance();
+	msg.text = e;
+	window.speechSynthesis.speak(msg);
+  }
   
 function slist (target) {
 	
@@ -104,8 +130,11 @@ function checkAnswers() {
 	if (isGood) {
 		for (let it=0; it<items.length; it++) {
 			items[it].classList.add("good");
-			initConfetti();
 		}
+		initConfetti();
+		var msg = new SpeechSynthesisUtterance();
+		msg.text = "Bravo. Youpi. La joie m'étreint.";
+		window.speechSynthesis.speak(msg);
 	}
 	else {
 		for (let it=0; it<items.length; it++) {
