@@ -132,9 +132,6 @@ function checkAnswers() {
 			items[it].classList.add("good");
 		}
 		initConfetti();
-		var msg = new SpeechSynthesisUtterance();
-		msg.text = "Bravo. Youpi. La joie m'étreint.";
-		window.speechSynthesis.speak(msg);
 	}
 	else {
 		for (let it=0; it<items.length; it++) {
